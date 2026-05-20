@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Check } from 'lucide-react';
 import HiringCtaButton from '@/components/landing/HiringCtaButton';
+import HeroBackgroundVideo from '@/features/marketing/components/HeroBackgroundVideo';
 import HeroVerifiedNetworkCard from '@/features/marketing/components/HeroVerifiedNetworkCard';
 import SiteNavbar from '@/components/layout/SiteNavbar';
+export { HERO_VIDEO_MP4, HERO_VIDEO_WEBM } from '@/features/marketing/heroVideo';
 import { HERO_CONTAINER } from '@/lib/marketingClasses';
 import { cn } from '@/lib/utils';
-
-/** Hero background videos — replace files under public/videos/ */
-export const HERO_VIDEO_WEBM = '/videos/nexa-hero-bg.webm';
-export const HERO_VIDEO_MP4 = '/videos/nexa-hero-bg.mp4';
 
 const TRUST_POINTS = [
   'Pre-screened profiles',
@@ -35,26 +33,18 @@ export default function HeroSection() {
       )}
       aria-label="NEXA Talent Hire hero"
     >
-      <video
-        className="absolute inset-0 h-full w-full object-cover object-[62%_center] sm:object-[58%_center] lg:object-center"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-      >
-        <source src={HERO_VIDEO_WEBM} type="video/webm" />
-        <source src={HERO_VIDEO_MP4} type="video/mp4" />
-      </video>
+      <HeroBackgroundVideo />
 
-      <div className="hero-overlay-ltr pointer-events-none absolute inset-0" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,11,22,0.15)_0%,rgba(2,11,22,0.7)_100%)] sm:bg-[linear-gradient(180deg,rgba(2,11,22,0.2)_0%,rgba(2,11,22,0.75)_100%)]"
+        className="hero-overlay-ltr pointer-events-none absolute inset-0 z-[1]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[rgba(2,11,22,0.52)] sm:bg-[rgba(2,11,22,0.38)] md:bg-[rgba(2,11,22,0.22)] lg:bg-transparent"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(2,11,22,0.08)_0%,rgba(2,11,22,0.45)_100%)] sm:bg-[linear-gradient(180deg,rgba(2,11,22,0.12)_0%,rgba(2,11,22,0.55)_100%)] lg:bg-[linear-gradient(180deg,rgba(2,11,22,0.15)_0%,rgba(2,11,22,0.65)_100%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-[rgba(2,11,22,0.22)] sm:bg-[rgba(2,11,22,0.18)] md:bg-[rgba(2,11,22,0.12)] lg:bg-transparent"
         aria-hidden="true"
       />
 

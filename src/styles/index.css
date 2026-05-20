@@ -19,12 +19,12 @@
   --color-nexa-gray-dark: #5f5e5a;
 }
 
-/* Single page scroll on html only — avoid overflow-x on body/sections (creates 2nd scrollbar) */
+/* Page scroll on body — works reliably on iOS Safari (html-only scroll + overflow-x: clip breaks touch scroll) */
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: clip;
-    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -37,23 +37,23 @@
 
   body {
     @apply min-h-dvh bg-nexa-navy font-sans text-white antialiased;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: auto;
   }
 
   #root {
     max-width: 100%;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
-  /* Mobile nav open — avoid inline body.style conflicts with modals */
-  html.site-nav-menu-open,
-  html.site-nav-menu-open body {
-    overflow: hidden;
-  }
-
-  html.hiring-modal-open,
+  /* Lock scroll only while mobile nav or hiring modal is open */
+  html.site-nav-menu-open body,
   html.hiring-modal-open body {
     overflow: hidden;
+    touch-action: none;
   }
 
   textarea,
@@ -907,6 +907,12 @@
 }
 
 /* Partner ecosystem section */
+/* Clip horizontal orbit bleed only — do not use overflow-x: clip (breaks iOS page scroll) */
+.partner-ecosystem.marketing-section {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
 .partner-ecosystem {
   background: #020b16;
   isolation: isolate;
@@ -1030,9 +1036,63 @@
   justify-content: center;
 }
 
+/* md — tablet: centered orbit, clip inside visual */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .partner-ecosystem__visual {
+    min-height: 36rem;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .partner-orbit__canvas {
+    justify-content: center;
+  }
+}
+
+/* lg+ — orbit wider than column, left-aligned → clips on the right only */
 @media (min-width: 1024px) {
   .partner-ecosystem__visual {
     min-height: 45rem;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .partner-orbit__canvas--bleed-right {
+    justify-content: flex-start;
+    overflow: visible;
+  }
+
+  .partner-orbit__stage--responsive {
+    width: 50rem;
+    max-width: none;
+    height: 42rem;
+    margin-left: 0;
+    margin-right: auto;
+    overflow: visible;
+    --partner-orbit-r-inner: 13rem;
+    --partner-orbit-r-outer: 19.5rem;
+  }
+
+  .partner-orbit__stage--responsive .partner-orbit__bg-ring--4 {
+    display: none;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .partner-orbit__stage--responsive {
+    width: 53.125rem;
+    height: 45rem;
+    --partner-orbit-r-inner: 14.5rem;
+    --partner-orbit-r-outer: 21.5rem;
+  }
+}
+
+/* 2xl — full orbit, slight inset from text column */
+@media (min-width: 1536px) {
+  .partner-orbit__stage--responsive {
+    margin-left: 0.5rem;
   }
 }
 
@@ -1042,11 +1102,22 @@
   --partner-orbit-r-outer: clamp(15rem, 31vw, 21.5rem);
   --partner-orbit-inner-duration: 40s;
   --partner-orbit-outer-duration: 62s;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .partner-orbit__canvas {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: inherit;
+  overflow: visible;
+}
+
+.partner-orbit__stage--mobile,
+.partner-orbit__stage--tablet {
+  overflow: hidden;
 }
 
 .partner-orbit__stage {
@@ -1054,7 +1125,8 @@
   width: min(100%, 53.125rem);
   height: clamp(36rem, 52vw, 45rem);
   margin-inline: auto;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .partner-orbit__stage--lg {
@@ -1071,64 +1143,152 @@
   --partner-orbit-r-belt: 16.5rem;
 }
 
-/* Desktop orbit — ~850×720 stage, rolling rings */
+/* Desktop orbit — base (overridden at lg / xl / 2xl) */
 .partner-orbit__stage--responsive {
   width: min(100%, 53.125rem);
   height: clamp(38rem, 50vw, 45rem);
+  margin-inline: auto;
   --partner-orbit-r-inner: 11.75rem;
   --partner-orbit-r-outer: 18rem;
-}
-
-@media (min-width: 1024px) {
-  .partner-orbit__stage--responsive {
-    width: min(100%, 53.125rem);
-    height: 45rem;
-    --partner-orbit-r-inner: 14.5rem;
-    --partner-orbit-r-outer: 21.5rem;
-  }
 }
 
 .partner-orbit__stage--tablet {
   width: min(100%, 42rem);
   height: 36rem;
+  margin-inline: auto;
+  overflow: hidden;
   --partner-orbit-r-inner: 10.75rem;
   --partner-orbit-r-outer: 16.25rem;
 }
 
-/* Mobile — compact rolling orbit; radii must clear the hub + tile size */
-.partner-orbit__stage--mobile {
-  width: min(100%, 21.5rem);
-  height: clamp(21.5rem, 94vw, 27.5rem);
-  margin-inline: auto;
-  --partner-orbit-r-inner: clamp(6.25rem, 34vw, 7rem);
-  --partner-orbit-r-outer: clamp(9.25rem, 48vw, 10.25rem);
-  --partner-orbit-inner-duration: 48s;
-  --partner-orbit-outer-duration: 72s;
+.partner-orbit__stage--tablet .partner-orbit__bg-ring--4 {
+  display: none;
 }
 
+.partner-orbit__stage--tablet .partner-orbit__hub {
+  width: min(48%, 11rem);
+  padding: 0.75rem 0.6rem;
+}
+
+.partner-orbit__stage--tablet .partner-orbit__hub-logo--nav {
+  max-width: 8.5rem;
+}
+
+.partner-orbit__stage--tablet .partner-orbit__hub-logo--nav img {
+  max-height: 2.25rem;
+}
+
+/* Mobile — static orbit (no spin); stage sized to fit rings + tiles */
+.partner-orbit__stage--mobile {
+  margin-inline: auto;
+  overflow: hidden;
+  --partner-orbit-r-inner: 3.5rem;
+  --partner-orbit-r-outer: 5.5rem;
+  --partner-orbit-inner-duration: 52s;
+  --partner-orbit-outer-duration: 76s;
+}
+
+.partner-orbit__stage--mobile.partner-orbit__stage--static {
+  --partner-orbit-tile-half: 1.5rem;
+  --partner-orbit-stage-size: calc(
+    (var(--partner-orbit-r-outer) + var(--partner-orbit-tile-half) + 0.5rem) * 2
+  );
+  width: min(100%, var(--partner-orbit-stage-size));
+  height: min(100%, var(--partner-orbit-stage-size));
+  max-width: 17.5rem;
+  max-height: 17.5rem;
+  aspect-ratio: 1;
+}
+
+.partner-orbit__stage--static .partner-orbit__tile,
 .partner-orbit__stage--mobile .partner-orbit__tile--inner-ring,
 .partner-orbit__stage--mobile .partner-orbit__tile--lg,
-.partner-orbit__stage--mobile .partner-orbit__tile--xl {
-  width: 3.375rem;
-  height: 3.375rem;
-}
-
+.partner-orbit__stage--mobile .partner-orbit__tile--xl,
 .partner-orbit__stage--mobile .partner-orbit__tile--outer-ring,
 .partner-orbit__stage--mobile .partner-orbit__tile--md,
 .partner-orbit__stage--mobile .partner-orbit__tile--sm {
-  width: 3.125rem;
-  height: 3.125rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .partner-orbit__stage--mobile .partner-orbit__tile-inner {
-  padding: 5px;
-  border-radius: 12px;
+  padding: 4px;
+  border-radius: 10px;
 }
 
+.partner-orbit__stage--mobile .partner-orbit__logo-img {
+  max-height: 1.35rem;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__logo-img--wide {
+  max-height: 1.2rem;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__logo-fallback {
+  font-size: 0.5625rem;
+}
+
+.partner-orbit__stage--static .partner-orbit__hub,
 .partner-orbit__stage--mobile .partner-orbit__hub {
-  width: min(38%, 7.25rem);
-  padding: 0.85rem 0.65rem;
-  gap: 0.25rem;
+  width: min(50%, 5.25rem);
+  padding: 0.35rem 0.3rem 0.3rem;
+  gap: 0.12rem;
+}
+
+.partner-orbit__stage--static .partner-orbit__static-logos {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 6;
+  width: 0;
+  height: 0;
+}
+
+.partner-orbit__stage--static .partner-orbit__static-anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--orbit-angle)) translateY(calc(-1 * var(--orbit-radius)));
+  pointer-events: auto;
+}
+
+.partner-orbit__stage--static .partner-orbit__static-anchor--inner {
+  --orbit-radius: var(--partner-orbit-r-inner);
+}
+
+.partner-orbit__stage--static .partner-orbit__static-anchor--outer {
+  --orbit-radius: var(--partner-orbit-r-outer);
+}
+
+.partner-orbit__stage--static .partner-orbit__static-anchor .partner-orbit__tile {
+  position: relative;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.partner-orbit__stage--mobile .partner-orbit__hub-logo--nav {
+  width: 100%;
+  max-width: 6.25rem;
+  justify-content: center;
+}
+
+.partner-orbit__stage--static .partner-orbit__hub-logo--nav img,
+.partner-orbit__stage--mobile .partner-orbit__hub-logo--nav img {
+  width: 100%;
+  height: auto;
+  max-height: 1.65rem;
+  object-fit: contain;
+  object-position: center;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__hub-sub {
+  font-size: 0.625rem;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__hub-meta {
+  display: none;
 }
 
 .partner-orbit__stage--mobile .partner-orbit__hub-title {
@@ -1146,14 +1306,40 @@
   gap: 0.35rem;
 }
 
-.partner-orbit__stage--mobile .partner-orbit__ring--inner {
-  width: calc(var(--partner-orbit-r-inner) * 2 + 2.75rem);
-  height: calc(var(--partner-orbit-r-inner) * 2 + 2.75rem);
+.partner-orbit__stage--mobile .partner-orbit__bg-ring--4 {
+  display: none;
 }
 
+.partner-orbit__stage--static .partner-orbit__ring--inner,
+.partner-orbit__stage--mobile .partner-orbit__ring--inner {
+  width: calc(var(--partner-orbit-r-inner) * 2);
+  height: calc(var(--partner-orbit-r-inner) * 2);
+  animation: none;
+}
+
+.partner-orbit__stage--static .partner-orbit__ring--outer,
 .partner-orbit__stage--mobile .partner-orbit__ring--outer {
-  width: calc(var(--partner-orbit-r-outer) * 2 + 3.25rem);
-  height: calc(var(--partner-orbit-r-outer) * 2 + 3.25rem);
+  width: calc(var(--partner-orbit-r-outer) * 2);
+  height: calc(var(--partner-orbit-r-outer) * 2);
+  animation: none;
+}
+
+.partner-orbit__stage--static .partner-orbit__logo-img {
+  max-height: 1.75rem;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__glow-outer,
+.partner-orbit__stage--mobile .partner-orbit__glow-violet {
+  width: 92%;
+  height: 92%;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__tooltip {
+  display: none;
+}
+
+.partner-orbit__stage--mobile .partner-orbit__roll-float {
+  animation: none;
 }
 
 .partner-orbit__stage--mobile .partner-orbit__ring--mid,
@@ -1166,15 +1352,23 @@
   display: none;
 }
 
-.partner-orbit__canvas--mobile {
-  width: 100%;
-  overflow: visible;
-}
-
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .partner-ecosystem__visual {
-    min-height: clamp(22rem, 94vw, 29rem);
+    min-height: auto;
+    max-width: 100%;
     overflow: visible;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .partner-orbit__canvas {
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .partner-ecosystem__glow--right {
+    right: 0;
+    width: min(24rem, 55vw);
   }
 }
 
@@ -1429,6 +1623,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: 0.4rem;
   overflow: hidden;
   border-radius: 1.5rem;
@@ -1510,18 +1705,21 @@
   box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
 }
 
-/* Rolling logo orbit — ring spins, tiles counter-rotate to stay upright */
+/* Rolling logo orbit — origin at stage center, rings rotate around hub */
 .partner-orbit__roll-layers {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
   z-index: 6;
+  width: 0;
+  height: 0;
   pointer-events: none;
 }
 
 .partner-orbit__roll-ring {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 0;
+  top: 0;
   width: 0;
   height: 0;
   transform-origin: center center;
@@ -1962,12 +2160,18 @@
   }
 
   .partner-orbit__stage--mobile {
-    height: auto;
-    min-height: 20rem;
+    width: clamp(17.5rem, 88vw, 20rem);
+    height: clamp(17.5rem, 88vw, 20rem);
+    min-height: 17.5rem;
   }
 
   .partner-orbit__stage--mobile .partner-orbit__roll-ring {
     transform: none !important;
+  }
+
+  .partner-orbit__stage--mobile .partner-orbit__ring--inner,
+  .partner-orbit__stage--mobile .partner-orbit__ring--outer {
+    animation: none !important;
   }
 }
 

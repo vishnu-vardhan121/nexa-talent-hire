@@ -1,4 +1,6 @@
 import { ArrowRight, Briefcase, MapPin, Users } from 'lucide-react';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import PartnerOrbitVisual from '@/features/marketing/components/HiringPartnerEcosystem/PartnerOrbitVisual';
 import {
   ECOSYSTEM_COPY,
@@ -21,7 +23,7 @@ export default function HiringPartnerEcosystem() {
       ref={sectionRef}
       id="hiring-partner-ecosystem"
       className={cn(
-        'partner-ecosystem relative overflow-hidden py-[4.5rem] lg:py-[6.875rem]',
+        'partner-ecosystem marketing-section relative overflow-hidden',
         isVisible && 'partner-ecosystem--visible',
       )}
       aria-labelledby="partner-ecosystem-heading"
@@ -37,9 +39,9 @@ export default function HiringPartnerEcosystem() {
         <div className="partner-ecosystem__vignette" />
       </div>
 
-      <div className="relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
-        <div className="partner-ecosystem__split grid items-center gap-10 lg:grid-cols-[minmax(0,38%)_minmax(0,62%)] lg:gap-8 xl:gap-10">
-          <div className="partner-ecosystem__left flex flex-col justify-center text-left">
+      <div className="marketing-section__container">
+        <div className="partner-ecosystem__split marketing-split marketing-split--41-59">
+          <div className="partner-ecosystem__left flex min-w-0 flex-col justify-center text-left">
             <p className="partner-ecosystem__eyebrow inline-flex w-fit items-center gap-2.5 rounded-full border border-[rgba(56,189,248,0.22)] bg-[rgba(15,23,42,0.72)] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-[#CBD5E1] backdrop-blur-md sm:text-xs">
               <span
                 className="h-2 w-2 shrink-0 rounded-full bg-[#38BDF8] shadow-[0_0_10px_#38BDF8]"
@@ -47,12 +49,12 @@ export default function HiringPartnerEcosystem() {
               />
               {ECOSYSTEM_COPY.eyebrow}
             </p>
-            <h2
+            <SectionHeadline
               id="partner-ecosystem-heading"
-              className="partner-ecosystem__heading mt-4 font-display text-[clamp(1.625rem,3.2vw+0.5rem,2.75rem)] font-extrabold leading-[1.1] tracking-tight text-[#F8FAFC] sm:mt-5"
+              className="partner-ecosystem__heading marketing-section-headline--split mt-4 sm:mt-5"
             >
               {ECOSYSTEM_COPY.heading}
-            </h2>
+            </SectionHeadline>
             <p className="partner-ecosystem__subtitle mt-3 max-w-[26rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:text-[15px]">
               {ECOSYSTEM_COPY.subtitle}
             </p>
@@ -74,13 +76,31 @@ export default function HiringPartnerEcosystem() {
                       >
                         <Icon className="h-4 w-4" strokeWidth={1.75} />
                       </span>
-                      <div className="min-w-0">
-                        <p className="font-display text-base font-bold leading-none text-[#F8FAFC] sm:text-[1.0625rem]">
-                          {stat.value}
-                        </p>
-                        <p className="mt-1 text-xs leading-snug text-[#94A3B8] sm:text-[13px]">
-                          {stat.label}
-                        </p>
+                      <div
+                        className={cn(
+                          'min-w-0 flex-1',
+                          stat.secondaryValue &&
+                            'partner-ecosystem__stat-metrics--dual flex items-stretch gap-5 sm:gap-6',
+                        )}
+                      >
+                        <div className="partner-ecosystem__stat-metric min-w-0">
+                          <p className="font-display text-base font-bold leading-none text-[#F8FAFC] sm:text-[1.0625rem]">
+                            {stat.value}
+                          </p>
+                          <p className="mt-1 text-xs leading-snug text-[#94A3B8] sm:text-[13px]">
+                            {stat.label}
+                          </p>
+                        </div>
+                        {stat.secondaryValue ? (
+                          <div className="partner-ecosystem__stat-metric min-w-0 border-l border-[rgba(148,163,184,0.18)] pl-5 sm:pl-6">
+                            <p className="font-display text-base font-bold leading-none text-[#F8FAFC] sm:text-[1.0625rem]">
+                              {stat.secondaryValue}
+                            </p>
+                            <p className="mt-1 text-xs leading-snug text-[#94A3B8] sm:text-[13px]">
+                              {stat.secondaryLabel}
+                            </p>
+                          </div>
+                        ) : null}
                       </div>
                     </article>
                   </li>
@@ -89,13 +109,13 @@ export default function HiringPartnerEcosystem() {
             </ul>
 
             <div className="partner-ecosystem__cta-wrap mt-7 sm:mt-8">
-              <a
-                href={ECOSYSTEM_COPY.ctaHref}
+              <HiringCtaButton
+                source="partner_ecosystem"
                 className="partner-ecosystem__cta hero-cta-primary inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-white sm:px-7 sm:py-3.5 sm:text-[15px]"
               >
                 {ECOSYSTEM_COPY.cta}
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-              </a>
+              </HiringCtaButton>
               <p className="partner-ecosystem__footnote mt-4 max-w-[22rem] text-xs leading-relaxed text-[#94A3B8]/85 sm:text-[13px]">
                 {ECOSYSTEM_COPY.footnote}
               </p>

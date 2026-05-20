@@ -1,4 +1,5 @@
 import { AlertTriangle, Clock, Files, Hourglass } from 'lucide-react';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import HiringProblemVisual from '@/features/marketing/components/HiringProblemVisual';
 import { HIRING_PROBLEM_COPY, painChips } from '@/data/marketing/hiringProblem';
 import { useInView } from '@/lib/useInView';
@@ -25,7 +26,7 @@ export default function HiringProblemSection() {
     <section
       ref={sectionRef}
       className={cn(
-        'hiring-problem relative overflow-hidden py-[4.5rem] lg:py-[6.875rem]',
+        'hiring-problem marketing-section relative overflow-hidden',
         isVisible && 'hiring-problem--visible',
       )}
       aria-labelledby="hiring-problem-heading"
@@ -38,19 +39,19 @@ export default function HiringProblemSection() {
         <div className="hiring-problem__grid" />
       </div>
 
-      <div className="relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
-        <div className="hiring-problem__split grid items-center gap-10 lg:grid-cols-[minmax(0,35rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,35rem)_minmax(0,35rem)] xl:justify-between xl:gap-12">
-          <header className="hiring-problem__header max-w-[35rem] text-left">
+      <div className="marketing-section__container">
+        <div className="hiring-problem__split marketing-split">
+          <header className="hiring-problem__header min-w-0 max-w-[35rem] text-left">
             <p className="hiring-problem__eyebrow flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#38BDF8] sm:text-xs">
               <span className="h-px w-8 shrink-0 bg-gradient-to-r from-[#38BDF8] to-transparent" aria-hidden />
               {HIRING_PROBLEM_COPY.eyebrow}
             </p>
-            <h2
+            <SectionHeadline
               id="hiring-problem-heading"
-              className="hiring-problem__heading mt-5 font-display text-[clamp(2.125rem,4.5vw+0.25rem,3.5rem)] font-extrabold leading-[1.08] tracking-tight text-[#F8FAFC]"
+              className="hiring-problem__heading marketing-section-headline--emphasis mt-5"
             >
               {HIRING_PROBLEM_COPY.heading}
-            </h2>
+            </SectionHeadline>
             <p className="hiring-problem__subtitle mt-4 max-w-[34rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:text-base">
               {HIRING_PROBLEM_COPY.subtitle}
             </p>
@@ -59,7 +60,7 @@ export default function HiringProblemSection() {
             </p>
           </header>
 
-          <HiringProblemVisual className="hiring-problem__visual w-full lg:max-w-[35rem] lg:justify-self-end xl:justify-self-end" />
+          <HiringProblemVisual className="hiring-problem__visual w-full min-w-0 lg:max-w-[35rem] lg:justify-self-end" />
         </div>
 
         <ul

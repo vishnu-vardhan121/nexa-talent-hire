@@ -1,5 +1,7 @@
 import { ArrowRight, MessageCircle } from 'lucide-react';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import FloatingProfileDecor from '@/features/marketing/components/FinalHiringCTASection/FloatingProfileDecor';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import { FINAL_HIRING_CTA_COPY } from '@/data/marketing/finalHiringCta';
 import { useInView } from '@/lib/useInView';
 import { cn } from '@/lib/utils';
@@ -12,7 +14,7 @@ export default function FinalHiringCTASection() {
       ref={sectionRef}
       id="final-hiring-cta"
       className={cn(
-        'final-hiring-cta relative overflow-hidden py-[4.5rem] lg:py-[6.25rem]',
+        'final-hiring-cta marketing-section relative overflow-hidden',
         isVisible && 'final-hiring-cta--visible',
       )}
       aria-labelledby="final-hiring-cta-heading"
@@ -23,7 +25,7 @@ export default function FinalHiringCTASection() {
         <div className="final-hiring-cta__glow final-hiring-cta__glow--blue" />
       </div>
 
-      <div className="relative z-[1] mx-auto w-full max-w-[73.75rem] px-4 sm:px-6 lg:px-10">
+      <div className="marketing-section__container max-w-[73.75rem]">
         <div className="final-hiring-cta__shell">
           <article className="final-hiring-cta__card">
             <div className="final-hiring-cta__card-grid" aria-hidden />
@@ -39,32 +41,33 @@ export default function FinalHiringCTASection() {
                 {FINAL_HIRING_CTA_COPY.eyebrow}
               </p>
 
-              <h2
+              <SectionHeadline
                 id="final-hiring-cta-heading"
-                className="final-hiring-cta__heading mt-5 font-display text-[clamp(1.75rem,4vw+0.5rem,3rem)] font-extrabold leading-[1.08] tracking-tight text-[#F8FAFC] sm:mt-6"
+                className="final-hiring-cta__heading marketing-section-headline--cta mt-5 text-center sm:mt-6"
               >
                 {FINAL_HIRING_CTA_COPY.heading}
-              </h2>
+              </SectionHeadline>
 
               <p className="final-hiring-cta__subtitle mx-auto mt-4 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:text-base">
                 {FINAL_HIRING_CTA_COPY.subtitle}
               </p>
 
               <div className="final-hiring-cta__actions mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
-                <a
-                  href={FINAL_HIRING_CTA_COPY.primaryHref}
+                <HiringCtaButton
+                  source="final_cta_primary"
                   className="final-hiring-cta__btn-primary hero-cta-primary inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold text-white sm:w-auto sm:min-w-[14rem] sm:text-[15px]"
                 >
                   {FINAL_HIRING_CTA_COPY.primaryCta}
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-                </a>
-                <a
-                  href={FINAL_HIRING_CTA_COPY.secondaryHref}
+                </HiringCtaButton>
+                <HiringCtaButton
+                  source={FINAL_HIRING_CTA_COPY.secondaryModalSource}
+                  variant="secondary"
                   className="final-hiring-cta__btn-secondary inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(148,163,184,0.24)] bg-[rgba(2,11,22,0.55)] px-7 py-3.5 text-sm font-semibold text-[#F8FAFC] backdrop-blur-sm sm:w-auto sm:min-w-[14rem] sm:text-[15px]"
                 >
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden />
                   {FINAL_HIRING_CTA_COPY.secondaryCta}
-                </a>
+                </HiringCtaButton>
               </div>
 
               <p className="final-hiring-cta__trust mt-8 text-center text-xs leading-relaxed text-[#94A3B8] sm:mt-9 sm:text-[13px]">

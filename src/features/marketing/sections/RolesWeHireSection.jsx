@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import RoleCategoryCard from '@/features/marketing/components/RolesWeHireSection/RoleCategoryCard';
 import RolePreviewPanel from '@/features/marketing/components/RolesWeHireSection/RolePreviewPanel';
 import {
@@ -23,7 +24,7 @@ export default function RolesWeHireSection() {
       ref={sectionRef}
       id="roles-we-hire"
       className={cn(
-        'roles-we-hire relative overflow-hidden py-[4.5rem] lg:py-[6.875rem]',
+        'roles-we-hire marketing-section relative overflow-hidden',
         isVisible && 'roles-we-hire--visible',
       )}
       aria-labelledby="roles-we-hire-heading"
@@ -37,7 +38,7 @@ export default function RolesWeHireSection() {
         <div className="roles-we-hire__vignette" />
       </div>
 
-      <div className="relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
+      <div className="marketing-section__container">
         <header className="roles-we-hire__header mx-auto max-w-[40rem] text-center">
           <p className="roles-we-hire__eyebrow inline-flex items-center gap-2.5 rounded-full border border-[rgba(56,189,248,0.22)] bg-[rgba(15,23,42,0.72)] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-[#CBD5E1] backdrop-blur-md sm:text-xs">
             <span
@@ -46,12 +47,12 @@ export default function RolesWeHireSection() {
             />
             {ROLES_WE_HIRE_COPY.eyebrow}
           </p>
-          <h2
+          <SectionHeadline
             id="roles-we-hire-heading"
-            className="roles-we-hire__heading mt-4 font-display text-[clamp(1.625rem,3.2vw+0.5rem,2.75rem)] font-extrabold leading-[1.1] tracking-tight text-[#F8FAFC] sm:mt-5"
+            className="roles-we-hire__heading marketing-section-headline--centered mt-4 text-center sm:mt-5"
           >
             {ROLES_WE_HIRE_COPY.heading}
-          </h2>
+          </SectionHeadline>
           <p className="roles-we-hire__subtitle mx-auto mt-3 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:text-[15px]">
             {ROLES_WE_HIRE_COPY.subtitle}
           </p>
@@ -59,7 +60,7 @@ export default function RolesWeHireSection() {
 
         <div className="roles-we-hire__layout mt-10 lg:mt-12">
           <div
-            className="roles-we-hire__cards grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+            className="roles-we-hire__cards grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3"
             role="list"
             aria-label="Talent role categories"
           >

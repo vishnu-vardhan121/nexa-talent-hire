@@ -1,11 +1,10 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NAV_LINKS } from '@/config/site';
-import Button from '@/components/ui/Button';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import Logo from '@/components/ui/Logo';
 import { cn } from '@/lib/utils';
 
 export default function Navbar() {
-  const navigate = useNavigate();
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 border-b border-[rgba(83,74,183,0.3)] bg-[rgba(30,30,46,0.92)] backdrop-blur-md">
@@ -30,9 +29,12 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Button size="sm" className="shrink-0" onClick={() => navigate('/dashboard')}>
-          Post a Job
-        </Button>
+        <HiringCtaButton
+          source="navbar_post_requirement"
+          className="shrink-0 rounded-lg px-5 py-2.5 text-sm"
+        >
+          Post Requirement
+        </HiringCtaButton>
       </div>
     </header>
   );

@@ -9,7 +9,13 @@ export const ECOSYSTEM_COPY = {
 };
 
 export const partnerStats = [
-  { value: '2000+', label: 'Hiring Partners', icon: 'partners' },
+  {
+    value: '350+',
+    label: 'Partner Companies',
+    secondaryValue: '200+',
+    secondaryLabel: 'Hired — Pre-screened',
+    icon: 'partners',
+  },
   { value: 'Pan-India', label: 'Employer Network', icon: 'network' },
   { value: 'Multi-Role', label: 'Hiring Access', icon: 'roles' },
 ];

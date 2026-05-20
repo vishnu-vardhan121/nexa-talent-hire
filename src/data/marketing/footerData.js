@@ -1,3 +1,5 @@
+import { HIRING_TEAM_MAILTO } from '@/config/site';
+
 export const footerBrand = {
   name: 'NEXA Talent Hire',
   description:
@@ -25,8 +27,8 @@ export const footerColumns = [
       { label: 'Post Requirement', href: '#get-matched' },
       { label: 'Get Matched Candidates', href: '#get-matched' },
       { label: 'Bulk Hiring', href: '#get-matched' },
-      { label: 'Schedule Demo', href: 'mailto:hello@nexatalenthire.in' },
-      { label: 'Talk to Hiring Team', href: 'mailto:hello@nexatalenthire.in' },
+      { label: 'Schedule Demo', href: HIRING_TEAM_MAILTO },
+      { label: 'Talk to Hiring Team', href: HIRING_TEAM_MAILTO },
     ],
   },
   {
@@ -43,11 +45,10 @@ export const footerColumns = [
   {
     title: 'Company',
     links: [
-      { label: 'About', href: '#final-hiring-cta' },
-      { label: 'Contact', href: 'mailto:hello@nexatalenthire.in' },
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms & Conditions', href: '#' },
-      { label: 'Refund Policy', href: '#' },
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms & Conditions', href: '/terms-and-conditions' },
     ],
   },
 ];

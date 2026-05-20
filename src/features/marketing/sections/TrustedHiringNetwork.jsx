@@ -1,4 +1,5 @@
 import { Headphones, ListChecks, MapPin, ShieldCheck } from 'lucide-react';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import TrustedHiringIllustration from '@/features/marketing/components/TrustedHiringIllustration';
 import {
   companyTypes,
@@ -41,7 +42,7 @@ export default function TrustedHiringNetwork() {
     <section
       ref={sectionRef}
       className={cn(
-        'trusted-network relative -mt-12 overflow-hidden pt-16 pb-14 sm:-mt-16 sm:pt-20 sm:pb-16 md:-mt-20 lg:-mt-24 lg:pt-24 lg:pb-[6.875rem]',
+        'trusted-network marketing-section relative -mt-12 overflow-hidden pt-16 pb-14 sm:-mt-16 sm:pt-20 sm:pb-16 md:-mt-20 lg:-mt-24 lg:pt-24 lg:pb-0',
         isVisible && 'trusted-network--visible',
       )}
       aria-labelledby="trusted-network-heading"
@@ -54,7 +55,7 @@ export default function TrustedHiringNetwork() {
 
       <TrustedHiringIllustration className="trusted-network__illustration absolute top-8 right-0 z-0 hidden h-[min(72%,22rem)] w-[min(38%,20rem)] opacity-40 lg:block lg:top-12 lg:h-[28rem] lg:w-[22rem] xl:top-16 xl:h-[30rem] xl:w-[24rem] xl:opacity-50" />
 
-      <div className="trusted-network__inner relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
+      <div className="trusted-network__inner marketing-section__container">
         <header className="trusted-network__header mx-auto max-w-[min(100%,48rem)] text-center lg:max-w-[50rem]">
           <p className="trusted-network__eyebrow inline-flex max-w-full items-center gap-2 rounded-full border border-[rgba(56,189,248,0.22)] bg-[rgba(15,23,42,0.72)] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-[#CBD5E1] backdrop-blur-md min-[400px]:gap-2.5 min-[400px]:px-4 min-[400px]:text-xs sm:text-[13px]">
             <span
@@ -63,18 +64,18 @@ export default function TrustedHiringNetwork() {
             />
             {TRUSTED_NETWORK_COPY.eyebrow}
           </p>
-          <h2
+          <SectionHeadline
             id="trusted-network-heading"
-            className="trusted-network__heading mt-4 font-display text-[clamp(1.75rem,4.2vw+0.5rem,3.5rem)] font-extrabold leading-[1.12] tracking-tight text-[#F8FAFC] sm:mt-5"
+            className="trusted-network__heading marketing-section-headline--centered mt-4 text-center sm:mt-5"
           >
             {TRUSTED_NETWORK_COPY.heading}
-          </h2>
+          </SectionHeadline>
           <p className="trusted-network__subtitle mx-auto mt-3 max-w-[min(100%,45rem)] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:text-base lg:text-lg">
             {TRUSTED_NETWORK_COPY.subtitle}
           </p>
         </header>
 
-        <ul className="trusted-network__cards mx-auto mt-10 grid w-full max-w-[75rem] grid-cols-1 gap-4 min-[480px]:gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:mt-14 lg:grid-cols-4 lg:gap-6">
+        <ul className="trusted-network__cards mx-auto mt-10 grid w-full max-w-[75rem] grid-cols-1 gap-4 min-[480px]:gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6">
           {trustCards.map((card, index) => {
             const Icon = CARD_ICONS[card.icon];
             const accent = ACCENT_STYLES[card.accent];

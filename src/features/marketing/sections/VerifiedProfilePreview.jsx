@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+import SectionHeadline from '@/components/marketing/SectionHeadline';
 import CandidateProfileCard from '@/features/marketing/components/VerifiedProfilePreview/CandidateProfileCard';
 import {
   VERIFIED_PROFILE_COPY,
@@ -15,7 +16,7 @@ export default function VerifiedProfilePreview() {
       ref={sectionRef}
       id="verified-profile-preview"
       className={cn(
-        'verified-profile relative overflow-hidden py-[4.5rem] lg:py-[6.875rem]',
+        'verified-profile marketing-section relative overflow-hidden',
         isVisible && 'verified-profile--visible',
       )}
       aria-labelledby="verified-profile-heading"
@@ -30,9 +31,9 @@ export default function VerifiedProfilePreview() {
         <div className="verified-profile__vignette" />
       </div>
 
-      <div className="relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
-        <div className="verified-profile__split grid items-center gap-10 lg:grid-cols-[minmax(0,40%)_minmax(0,60%)] lg:gap-10 xl:gap-12">
-          <div className="verified-profile__left flex flex-col justify-center text-left">
+      <div className="marketing-section__container">
+        <div className="verified-profile__split marketing-split marketing-split--40-60">
+          <div className="verified-profile__left flex min-w-0 flex-col justify-center text-left">
             <p className="verified-profile__eyebrow inline-flex w-fit items-center gap-2.5 rounded-full border border-[rgba(56,189,248,0.22)] bg-[rgba(15,23,42,0.72)] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-[#CBD5E1] backdrop-blur-md sm:text-xs">
               <span
                 className="h-2 w-2 shrink-0 rounded-full bg-[#38BDF8] shadow-[0_0_10px_#38BDF8]"
@@ -40,12 +41,12 @@ export default function VerifiedProfilePreview() {
               />
               {VERIFIED_PROFILE_COPY.eyebrow}
             </p>
-            <h2
+            <SectionHeadline
               id="verified-profile-heading"
-              className="verified-profile__heading mt-4 font-display text-[clamp(1.625rem,3.2vw+0.5rem,2.75rem)] font-extrabold leading-[1.1] tracking-tight text-[#F8FAFC] sm:mt-5"
+              className="verified-profile__heading marketing-section-headline--split mt-4 sm:mt-5"
             >
               {VERIFIED_PROFILE_COPY.heading}
-            </h2>
+            </SectionHeadline>
             <p className="verified-profile__subtitle mt-3 max-w-[28rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:text-[15px]">
               {VERIFIED_PROFILE_COPY.subtitle}
             </p>

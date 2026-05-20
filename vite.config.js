@@ -6,6 +6,8 @@ import { defineConfig } from 'vite';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Env (Vite): `npm run dev` → mode development (.env, .env.development, *.local).
+// `npm run build:dev` → same. `npm run build` / `build:prod` → mode production (.env, .env.production, *.local).
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {

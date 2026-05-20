@@ -1,4 +1,7 @@
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
+import HiringCtaLink from '@/components/landing/HiringCtaLink';
 import {
   footerBottom,
   footerBrand,
@@ -7,11 +10,27 @@ import {
 import { useInView } from '@/lib/useInView';
 import { cn } from '@/lib/utils';
 
-function FooterLink({ href, children }) {
+function isInternalRoute(href) {
+  return typeof href === 'string' && href.startsWith('/') && !href.startsWith('//');
+}
+
+function FooterLink({ href, label, children }) {
+  if (isInternalRoute(href)) {
+    return (
+      <Link to={href} className="landing-footer__link">
+        <span className="landing-footer__link-text">{children}</span>
+      </Link>
+    );
+  }
+
   return (
-    <a href={href} className="landing-footer__link">
+    <HiringCtaLink
+      href={href}
+      source={`footer_${label.toLowerCase().replace(/\s+/g, '_')}`}
+      className="landing-footer__link"
+    >
       <span className="landing-footer__link-text">{children}</span>
-    </a>
+    </HiringCtaLink>
   );
 }
 
@@ -31,7 +50,7 @@ export default function LandingFooter() {
         <div className="landing-footer__glow landing-footer__glow--violet" />
       </div>
 
-      <div className="landing-footer__inner relative z-[1] mx-auto w-full max-w-[80rem] px-4 sm:px-6 lg:px-10">
+      <div className="landing-footer__inner">
         <div className="landing-footer__grid-main">
           <div className="landing-footer__brand">
             <a href="/" className="landing-footer__logo" id="landing-footer-brand">
@@ -47,13 +66,13 @@ export default function LandingFooter() {
 
             <div className="landing-footer__cta-block">
               <p className="landing-footer__cta-eyebrow">{footerBrand.ctaEyebrow}</p>
-              <a
-                href={footerBrand.ctaHref}
-                className="landing-footer__cta hero-cta-primary inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold text-white sm:text-[13px]"
+              <HiringCtaButton
+                source="footer_primary_cta"
+                className="landing-footer__cta hero-cta-primary inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold text-white sm:w-fit sm:text-[13px]"
               >
                 {footerBrand.ctaLabel}
                 <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              </a>
+              </HiringCtaButton>
             </div>
           </div>
 
@@ -63,7 +82,9 @@ export default function LandingFooter() {
               <ul className="landing-footer__links">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                    <FooterLink href={link.href} label={link.label}>
+                      {link.label}
+                    </FooterLink>
                   </li>
                 ))}
               </ul>

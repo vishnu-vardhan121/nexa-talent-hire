@@ -2,15 +2,16 @@ export const VERIFIED_PROFILE_COPY = {
   eyebrow: 'Verified Profile Preview',
   heading: 'Every Profile Comes With More Than a Resume',
   subtitle:
-    'NEXA gives hiring teams a structured view of candidate readiness — including skills, project exposure, availability, screening signals, and interview-fit details.',
-  supportingLine: 'Structured profiles with hiring signals — not unstructured resume dumps.',
+    'NEXA gives hiring teams a structured view of candidate readiness — including mock interview performance, project exposure, skill-fit signals, communication checks, and interview readiness.',
+  supportingLine:
+    'Structured profiles with hiring signals — not unverified resume dumps.',
 };
 
 export const checklistItems = [
-  'Skills and role-fit summary',
+  'Mock interview performance',
   'Project and portfolio signals',
-  'Availability and location preference',
-  'Communication and interview readiness',
+  'Skills and role-fit summary',
+  'Communication readiness check',
 ];
 
 export const profileMeta = {

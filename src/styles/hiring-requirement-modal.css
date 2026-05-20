@@ -1,0 +1,225 @@
+.hiring-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(2, 11, 22, 0.82);
+  overflow-y: auto;
+  animation: hiring-modal-fade-in 0.22s ease-out;
+}
+
+.hiring-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: min(92dvh, 56rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.96);
+  padding: 1.5rem 1.25rem 1.75rem;
+  box-shadow:
+    0 24px 80px rgba(2, 11, 22, 0.65),
+    0 0 0 1px rgba(56, 189, 248, 0.08) inset,
+    0 0 48px rgba(139, 92, 246, 0.12);
+  transform: scale(0.97);
+  opacity: 0;
+}
+
+.hiring-modal__panel--open {
+  animation: hiring-modal-panel-in 0.26s ease-out forwards;
+}
+
+.hiring-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(2, 11, 22, 0.55);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.hiring-modal__close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.hiring-modal__title {
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.25rem, 2.5vw + 0.5rem, 1.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+}
+
+.hiring-modal__subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #94a3b8;
+}
+
+.hiring-modal__label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.hiring-modal__required {
+  color: #38bdf8;
+}
+
+.hiring-modal__field-error {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #f87171;
+}
+
+.hiring-modal__input,
+.hiring-modal__select,
+.hiring-modal__textarea {
+  background: rgba(2, 11, 22, 0.72);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.hiring-modal__select option {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.hiring-modal__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .hiring-modal__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.hiring-modal__field-other {
+  margin-top: 0.5rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.hiring-modal__field--full {
+  grid-column: 1 / -1;
+}
+
+.hiring-modal__submit-error {
+  margin-top: 1rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: rgba(127, 29, 29, 0.25);
+  font-size: 0.875rem;
+  color: #fecaca;
+}
+
+.hiring-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.hiring-modal__cancel {
+  padding: 0.625rem 1.125rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.hiring-modal__cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hiring-modal__submit {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.hiring-modal__submit:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.hiring-modal__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.hiring-modal__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 0.5rem 0.5rem;
+}
+
+@keyframes hiring-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hiring-modal-panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hiring-modal,
+  .hiring-modal__panel,
+  .hiring-modal__panel--open {
+    animation: none;
+  }
+
+  .hiring-modal__panel {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Check, Menu, X } from 'lucide-react';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import { cn } from '@/lib/utils';
 
 /** Hero background videos — replace files under public/videos/ */
@@ -21,13 +22,14 @@ const TRUST_POINTS = [
   'Hiring support included',
 ];
 
-const DASHBOARD_STATS = [
-  { label: 'Matched Candidates', value: '236', shortLabel: 'Matched', dot: 'bg-[#38BDF8]' },
-  { label: 'Shortlisted Profiles', value: '48', shortLabel: 'Shortlisted', dot: 'bg-[#2563EB]' },
-  { label: 'Interview Ready', value: '32', shortLabel: 'Interview Ready', dot: 'bg-[#22C55E]' },
+const NETWORK_PROOF_STATS = [
+  { value: '2,500+', label: 'Pre-Screened Profiles', dot: 'cyan', textValue: false },
+  { value: '200+', label: 'Candidates Hired', dot: 'green', textValue: false },
+  { value: 'Pan-India', label: 'Talent Pool', dot: 'blue', textValue: true },
+  { value: 'Role-Based', label: 'Shortlisting', dot: 'violet', textValue: true },
 ];
 
-const PIPELINE_STEPS = ['Matched', 'Shortlisted', 'Interview', 'Hired'];
+const NETWORK_PIPELINE = ['Screened', 'Shortlisted', 'Interviewed', 'Hired'];
 
 function NexaLogo({ className }) {
   return (
@@ -69,13 +71,13 @@ function HeroNavbar({ mobileOpen, onToggleMobile, onCloseMobile }) {
           </nav>
 
           <div className="flex min-w-0 shrink-0 items-center gap-1.5 min-[400px]:gap-2 sm:gap-3">
-            <a
-              href="#get-matched"
+            <HiringCtaButton
+              source="hero_nav"
               className="hero-cta-primary hero-cta-nav inline-flex max-w-[9rem] shrink-0 items-center justify-center truncate rounded-lg px-2.5 py-2 text-[11px] font-semibold text-white min-[400px]:max-w-none min-[400px]:rounded-xl min-[400px]:px-3 min-[400px]:text-xs sm:rounded-2xl sm:px-4 sm:py-2.5 sm:text-sm xl:px-5"
             >
               <span className="xl:hidden">Get Matched</span>
               <span className="hidden xl:inline">Get Matched Candidates</span>
-            </a>
+            </HiringCtaButton>
 
             <button
               type="button"
@@ -110,103 +112,64 @@ function HeroNavbar({ mobileOpen, onToggleMobile, onCloseMobile }) {
               </li>
             ))}
           </ul>
-          <a
-            href="#get-matched"
+          <HiringCtaButton
+            source="hero_nav_mobile"
             className="hero-cta-primary mt-4 flex w-full justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white"
             onClick={onCloseMobile}
           >
             Get Matched Candidates
-          </a>
+          </HiringCtaButton>
         </nav>
       )}
     </header>
   );
 }
 
-function HiringSnapshotCard({ className, compact = false }) {
+function HeroVerifiedNetworkCard({ className, compact = false }) {
   return (
     <aside
       className={cn(
-        'hero-animate-dashboard pointer-events-auto w-full rounded-2xl border border-[rgba(148,163,184,0.18)] bg-[rgba(15,23,42,0.72)] shadow-[0_24px_64px_-12px_rgba(37,99,235,0.35)] backdrop-blur-[16px]',
+        'hero-proof-card hero-animate-dashboard pointer-events-auto relative w-full overflow-hidden rounded-2xl',
         compact
-          ? 'max-w-none p-4 sm:rounded-3xl sm:p-5'
-          : 'max-w-[min(100%,20rem)] p-5 sm:max-w-[21.25rem] sm:p-6 lg:max-w-[22.5rem] 2xl:max-w-[24rem] 2xl:p-7',
+          ? 'max-w-none p-3.5 sm:rounded-3xl sm:p-4'
+          : 'max-w-[min(100%,19.5rem)] p-4 sm:max-w-[20.5rem] sm:p-[1.125rem] lg:max-w-[21rem] 2xl:max-w-[22rem] 2xl:p-5',
         className,
       )}
-      aria-label="Hiring snapshot"
+      aria-label="Verified talent network proof"
     >
-      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#94A3B8] sm:text-xs">
-        Hiring Snapshot
-      </p>
+      <div className="hero-proof-card__shine" aria-hidden />
 
-      <ul
-        className={cn(
-          'mt-3 sm:mt-4',
-          compact ? 'grid grid-cols-3 gap-2 sm:gap-3' : 'space-y-3',
-        )}
-      >
-        {DASHBOARD_STATS.map((stat) => (
-          <li
-            key={stat.label}
-            className={cn(
-              compact
-                ? 'flex flex-col items-center gap-1 text-center min-[480px]:flex-row min-[480px]:items-center min-[480px]:gap-2 min-[480px]:text-left'
-                : 'flex items-center gap-3',
-            )}
-          >
-            <span
-              className={cn(
-                'shrink-0 rounded-full shadow-[0_0_8px_currentColor]',
-                stat.dot,
-                compact ? 'h-1.5 w-1.5 min-[480px]:h-2 min-[480px]:w-2' : 'h-2 w-2',
-              )}
-              aria-hidden
-            />
-            <div className="min-w-0">
+      <p className="hero-proof-card__title">Verified Talent Network</p>
+
+      <ul className="hero-proof-card__grid mt-3 sm:mt-3.5">
+        {NETWORK_PROOF_STATS.map((stat) => (
+          <li key={stat.label} className="hero-proof-card__stat">
+            <div className="hero-proof-card__stat-head">
+              <span
+                className={cn('hero-proof-card__dot', `hero-proof-card__dot--${stat.dot}`)}
+                aria-hidden
+              />
               <p
                 className={cn(
-                  'font-display font-bold leading-none text-[#F8FAFC]',
-                  compact ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl 2xl:text-[1.65rem]',
+                  'hero-proof-card__value',
+                  stat.textValue && 'hero-proof-card__value--text',
                 )}
               >
                 {stat.value}
               </p>
-              <p
-                className={cn(
-                  'mt-0.5 text-[#94A3B8]',
-                  compact
-                    ? 'text-[9px] leading-tight min-[480px]:text-[10px] sm:text-xs'
-                    : 'text-xs',
-                )}
-              >
-                <span className="sm:hidden">{stat.shortLabel}</span>
-                <span className="hidden sm:inline">{stat.label}</span>
-              </p>
             </div>
+            <p className="hero-proof-card__label">{stat.label}</p>
           </li>
         ))}
       </ul>
 
-      <div className="mt-4 border-t border-[rgba(148,163,184,0.14)] pt-3 sm:mt-5 sm:pt-4">
-        <p className="text-[10px] font-medium uppercase tracking-wider text-[#94A3B8] sm:text-[11px]">Pipeline</p>
-        <div
-          className={cn(
-            'mt-2 flex flex-wrap items-center text-[#CBD5E1]',
-            compact ? 'gap-0.5 text-[10px] sm:gap-1 sm:text-xs' : 'gap-1.5 text-xs',
-          )}
-        >
-          {PIPELINE_STEPS.map((step, i) => (
-            <span key={step} className="inline-flex items-center gap-0.5 sm:gap-1">
-              <span
-                className={cn(
-                  'rounded-full bg-[rgba(56,189,248,0.15)] text-[#38BDF8]',
-                  compact ? 'px-1.5 py-px text-[9px] sm:px-2 sm:py-0.5 sm:text-[11px]' : 'px-2 py-0.5 text-[11px]',
-                )}
-              >
-                {step}
-              </span>
-              {i < PIPELINE_STEPS.length - 1 && (
-                <span className="text-[#64748B]" aria-hidden>
+      <div className="relative z-[1] mt-3 border-t border-[rgba(148,163,184,0.14)] pt-3 sm:mt-3.5">
+        <div className="hero-proof-card__pipeline">
+          {NETWORK_PIPELINE.map((step, i) => (
+            <span key={step} className="inline-flex items-center">
+              <span className="hero-proof-card__chip">{step}</span>
+              {i < NETWORK_PIPELINE.length - 1 && (
+                <span className="hero-proof-card__arrow px-0.5" aria-hidden>
                   →
                 </span>
               )}
@@ -282,27 +245,31 @@ export default function HeroSection() {
             </p>
 
             <h1 className="hero-animate-headline hero-headline font-display font-extrabold tracking-tight text-[#F8FAFC]">
-              Hire Pre-Screened Talent Without{' '}
+              Hire
+              <br />
               <span className="bg-[linear-gradient(90deg,#38BDF8,#2563EB,#8B5CF6)] bg-clip-text text-transparent">
-                Resume Noise
+                Pre-Screen Talent
               </span>
+              <br />
+              to Save Your Hiring Time
             </h1>
 
-            <p className="hero-animate-subhead hero-subhead mt-4 max-w-[36rem] text-[#CBD5E1] min-[400px]:mt-5 xl:max-w-[38rem] 2xl:max-w-[40rem]">
-              Get matched with verified, job-ready candidates from across India — already screened for
-              skills, projects, communication, and interview readiness.
+            <p className="hero-animate-subhead hero-subhead mt-4 max-w-[36rem] min-w-0 text-[#CBD5E1] min-[400px]:mt-5 xl:max-w-[38rem] 2xl:max-w-[40rem]">
+              Get pre-screened, job-ready talent from across India — already verified for skills,
+              projects, communication, and interview readiness, so you can move from shortlist to hire
+              faster.
             </p>
 
             <div
               id="get-matched"
               className="hero-animate-cta mt-6 flex w-full flex-col gap-2.5 min-[400px]:mt-7 min-[400px]:gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3"
             >
-              <a
-                href="#get-matched"
+              <HiringCtaButton
+                source="hero_primary"
                 className="hero-cta-primary inline-flex w-full min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white min-[400px]:min-h-[3.25rem] min-[400px]:rounded-2xl min-[400px]:px-7 min-[400px]:py-3.5 min-[400px]:text-[15px] sm:w-auto sm:min-w-[12.5rem] sm:px-8 sm:py-4"
               >
                 Get Matched Candidates
-              </a>
+              </HiringCtaButton>
               <a
                 href="#talent-pool"
                 className="hero-cta-secondary inline-flex w-full min-h-12 items-center justify-center rounded-xl border border-[rgba(148,163,184,0.28)] bg-[rgba(255,255,255,0.03)] px-5 py-3 text-sm font-semibold text-[#F8FAFC] backdrop-blur-sm transition-all duration-200 hover:bg-[rgba(255,255,255,0.08)] min-[400px]:min-h-[3.25rem] min-[400px]:rounded-2xl min-[400px]:px-7 min-[400px]:py-3.5 min-[400px]:text-[15px] sm:w-auto sm:min-w-[11rem] sm:px-8 sm:py-4"
@@ -311,7 +278,7 @@ export default function HeroSection() {
               </a>
             </div>
 
-            <ul className="hero-animate-trust mt-6 flex flex-col gap-2.5 min-[400px]:mt-7 min-[400px]:gap-3 sm:mt-8 md:flex-row md:flex-wrap md:gap-x-6 md:gap-y-2 lg:flex-col lg:gap-3 xl:flex-row xl:flex-wrap xl:gap-x-8 2xl:gap-x-10">
+            <ul className="hero-animate-trust mt-6 flex flex-col gap-2.5 min-[400px]:mt-7 min-[400px]:gap-3 sm:mt-8 lg:flex-col lg:gap-3 xl:flex-row xl:flex-wrap xl:gap-x-8 2xl:gap-x-10">
               {TRUST_POINTS.map((point) => (
                 <li key={point} className="flex min-w-0 items-center gap-2 text-[13px] text-[#CBD5E1] sm:text-sm">
                   <Check className="h-3.5 w-3.5 shrink-0 text-[#22C55E] sm:h-4 sm:w-4" strokeWidth={2.5} aria-hidden />
@@ -320,11 +287,11 @@ export default function HeroSection() {
               ))}
             </ul>
 
-            <HiringSnapshotCard compact className="hero-animate-dashboard mt-8 lg:hidden" />
+            <HeroVerifiedNetworkCard compact className="mt-8 lg:hidden" />
           </div>
 
           <div className="hidden min-w-0 lg:flex lg:justify-end lg:self-center xl:pr-2 2xl:pr-4">
-            <HiringSnapshotCard className="hero-animate-dashboard w-full" />
+            <HeroVerifiedNetworkCard className="w-full" />
           </div>
         </div>
       </div>

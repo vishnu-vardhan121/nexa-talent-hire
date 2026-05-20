@@ -1,4 +1,5 @@
 import { ArrowRight, Check } from 'lucide-react';
+import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import { ROLES_WE_HIRE_COPY } from '@/data/marketing/rolesWeHire';
 import { cn } from '@/lib/utils';
 
@@ -61,13 +62,13 @@ export default function RolePreviewPanel({ role, className }) {
           <p className="roles-we-hire__preview-fit">{role.hiringFit}</p>
         </section>
 
-        <a
-          href={ROLES_WE_HIRE_COPY.ctaHref}
+        <HiringCtaButton
+          source="roles_we_hire"
           className="roles-we-hire__preview-cta hero-cta-primary inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold text-white sm:text-[15px]"
         >
           {ROLES_WE_HIRE_COPY.cta}
           <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-        </a>
+        </HiringCtaButton>
       </div>
     </aside>
   );

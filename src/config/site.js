@@ -9,7 +9,7 @@ export const SITE = {
   tagline: 'Hire with prescreened profiles. Save time.',
   description:
     'NexaTalentHire helps companies hire faster with pre-screened, interview-ready tech talent across India.',
-  domain: 'nexatalenthire.in',
+  domain: 'nexatalenthire.com',
   contactEmail: 'admin@naveentalenthub.in',
   supportEmail: 'admin@naveentalenthub.in',
 };
@@ -18,7 +18,7 @@ export const HIRING_TEAM_MAILTO = `mailto:${SITE.contactEmail}`;
 
 /** Primary nav — same labels and CTA on every page. */
 export const PRIMARY_NAV_LINKS = [
-  { label: 'How it works', sectionId: 'trusted-hiring-network' },
+  { label: 'How it works', sectionId: 'how-it-works' },
   { label: 'Roles we hire', sectionId: 'roles-we-hire' },
   { label: 'Contact', href: '/contact' },
 ];

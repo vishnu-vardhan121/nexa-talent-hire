@@ -41,7 +41,7 @@ export default function HeroSection() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         aria-hidden="true"
       >
         <source src={HERO_VIDEO_WEBM} type="video/webm" />
@@ -79,12 +79,10 @@ export default function HeroSection() {
                 'md:max-lg:text-[clamp(3rem,2rem+2.5vw,3.5rem)]',
               )}
             >
-              Hire
-              <br />
+              Hire{' '}
               <span className="bg-[linear-gradient(90deg,#38BDF8,#2563EB,#8B5CF6)] bg-clip-text text-transparent">
-                Pre-Screen Talent
-              </span>
-              <br />
+                Pre-Screened Talent
+              </span>{' '}
               to Save Your Hiring Time
             </h1>
 
@@ -95,8 +93,8 @@ export default function HeroSection() {
               )}
             >
               Get pre-screened, job-ready talent from across India — already verified for skills,
-              projects, communication, and interview readiness, so you can move from shortlist to hire
-              faster.
+              projects, communication, and interview readiness, so your team can move from shortlist to
+              hire faster.
             </p>
 
             <div

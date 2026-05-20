@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import HiringCtaLink from '@/components/landing/HiringCtaLink';
 import NexaLogo from '@/components/ui/NexaLogo';
@@ -16,9 +16,27 @@ function isInternalRoute(href) {
 }
 
 function FooterLink({ href, label, children }) {
+  const { pathname } = useLocation();
+
   if (isInternalRoute(href)) {
     return (
       <Link to={href} className="landing-footer__link">
+        <span className="landing-footer__link-text">{children}</span>
+      </Link>
+    );
+  }
+
+  if (typeof href === 'string' && href.startsWith('#')) {
+    const hash = href;
+    if (pathname === '/') {
+      return (
+        <a href={hash} className="landing-footer__link">
+          <span className="landing-footer__link-text">{children}</span>
+        </a>
+      );
+    }
+    return (
+      <Link to={{ pathname: '/', hash }} className="landing-footer__link">
         <span className="landing-footer__link-text">{children}</span>
       </Link>
     );

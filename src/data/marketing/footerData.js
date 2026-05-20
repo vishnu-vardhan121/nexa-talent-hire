@@ -3,7 +3,7 @@ import { HIRING_TEAM_MAILTO } from '@/config/site';
 export const footerBrand = {
   name: 'NEXA Talent Hire',
   description:
-    'Helping companies hire verified, job-ready candidates faster through pre-screened profiles, role-based matching, and assisted hiring support.',
+    'NEXA Talent Hire helps companies hire verified, job-ready candidates across India through pre-screened profiles, role-based matching, and assisted hiring support.',
   tagline: 'Hire smarter. Shortlist faster.',
   ctaEyebrow: 'Ready to hire?',
   ctaLabel: 'Get Matched Candidates',
@@ -14,11 +14,11 @@ export const footerColumns = [
   {
     title: 'Platform',
     links: [
-      { label: 'How It Works', href: '#trusted-hiring-network' },
+      { label: 'How It Works', href: '#how-it-works' },
+      { label: 'Screening Flow', href: '#screening-flow' },
       { label: 'Talent Pool', href: '#talent-pool' },
       { label: 'Roles We Hire', href: '#roles-we-hire' },
-      { label: 'Verified Profiles', href: '#verified-profile-preview' },
-      { label: 'Hiring Partners', href: '#hiring-partner-ecosystem' },
+      { label: 'Hiring Partners', href: '#hiring-partners' },
     ],
   },
   {

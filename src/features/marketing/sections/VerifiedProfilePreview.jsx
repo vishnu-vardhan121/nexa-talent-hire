@@ -14,7 +14,7 @@ export default function VerifiedProfilePreview() {
   return (
     <section
       ref={sectionRef}
-      id="verified-profile-preview"
+      id="talent-pool"
       className={cn(
         'verified-profile marketing-section relative overflow-hidden',
         isVisible && 'verified-profile--visible',

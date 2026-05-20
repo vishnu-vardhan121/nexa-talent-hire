@@ -1,3 +1,8 @@
+export const SCREENING_FLOW_COPY = {
+  eyebrow: 'NEXA Screening Flow',
+  heading: 'From Raw Profiles to Verified Shortlists',
+};
+
 export const HIRING_PROBLEM_COPY = {
   eyebrow: 'The Hiring Bottleneck',
   heading: 'Hiring Shouldn’t Start With Hundreds of Unverified Resumes',

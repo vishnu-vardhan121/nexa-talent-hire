@@ -2,7 +2,8 @@ import { useState } from 'react';
 import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import StaticPageLayout from '@/components/common/StaticPageLayout';
 import { SITE } from '@/config/site';
-import { usePageTitle } from '@/lib/usePageTitle';
+import { SEO_PAGES } from '@/config/seo';
+import { useSeo } from '@/lib/useSeo';
 import { cn } from '@/lib/utils';
 
 const INITIAL_FORM = {
@@ -14,7 +15,7 @@ const INITIAL_FORM = {
 };
 
 export default function ContactPage() {
-  usePageTitle('Contact | NEXA Talent Hire');
+  useSeo(SEO_PAGES.contact);
   const [form, setForm] = useState(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
 

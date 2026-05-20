@@ -1,7 +1,7 @@
 import { AlertTriangle, Clock, Files, Hourglass } from 'lucide-react';
 import SectionHeadline from '@/components/marketing/SectionHeadline';
 import HiringProblemVisual from '@/features/marketing/components/HiringProblemVisual';
-import { HIRING_PROBLEM_COPY, painChips } from '@/data/marketing/hiringProblem';
+import { HIRING_PROBLEM_COPY, SCREENING_FLOW_COPY, painChips } from '@/data/marketing/hiringProblem';
 import { useInView } from '@/lib/useInView';
 import { cn } from '@/lib/utils';
 
@@ -25,6 +25,7 @@ export default function HiringProblemSection() {
   return (
     <section
       ref={sectionRef}
+      id="screening-flow"
       className={cn(
         'hiring-problem marketing-section relative overflow-hidden',
         isVisible && 'hiring-problem--visible',
@@ -60,7 +61,15 @@ export default function HiringProblemSection() {
             </p>
           </header>
 
-          <HiringProblemVisual className="hiring-problem__visual w-full min-w-0 lg:max-w-[36rem] lg:justify-self-end" />
+          <div className="hiring-problem__visual w-full min-w-0 lg:max-w-[36rem] lg:justify-self-end">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#38BDF8] sm:text-xs">
+              {SCREENING_FLOW_COPY.eyebrow}
+            </p>
+            <h3 className="mt-2 mb-4 font-display text-lg font-bold leading-snug text-[#F8FAFC] sm:mt-2.5 sm:mb-5 sm:text-xl">
+              {SCREENING_FLOW_COPY.heading}
+            </h3>
+            <HiringProblemVisual />
+          </div>
         </div>
 
         <ul

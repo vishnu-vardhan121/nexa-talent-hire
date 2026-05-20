@@ -24,7 +24,7 @@ export default function NexaLogo({ asLink = true, size = 'nav', className, imgCl
   const image = (
     <img
       src={src}
-      alt={SITE.name}
+      alt="NEXA Talent Hire logo"
       className={cn('block object-contain object-left', SIZE_CLASS[size], imgClassName)}
       width={width}
       height={height}

@@ -21,7 +21,7 @@ export default function HiringPartnerEcosystem() {
   return (
     <section
       ref={sectionRef}
-      id="hiring-partner-ecosystem"
+      id="hiring-partners"
       className={cn(
         'partner-ecosystem marketing-section relative overflow-hidden',
         isVisible && 'partner-ecosystem--visible',

@@ -1,9 +1,10 @@
 import StaticPageLayout from '@/components/common/StaticPageLayout';
 import { SITE } from '@/config/site';
-import { usePageTitle } from '@/lib/usePageTitle';
+import { SEO_PAGES } from '@/config/seo';
+import { useSeo } from '@/lib/useSeo';
 
 export default function TermsAndConditionsPage() {
-  usePageTitle('Terms & Conditions | NEXA Talent Hire');
+  useSeo(SEO_PAGES.terms);
 
   return (
     <StaticPageLayout

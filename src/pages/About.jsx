@@ -1,8 +1,9 @@
 import StaticPageLayout from '@/components/common/StaticPageLayout';
-import { usePageTitle } from '@/lib/usePageTitle';
+import { SEO_PAGES } from '@/config/seo';
+import { useSeo } from '@/lib/useSeo';
 
 export default function AboutPage() {
-  usePageTitle('About | NEXA Talent Hire');
+  useSeo(SEO_PAGES.about);
 
   return (
     <StaticPageLayout

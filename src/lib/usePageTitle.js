@@ -1,12 +1,6 @@
-import { useEffect } from 'react';
+import { useSeo } from '@/lib/useSeo';
 
-/** Sets document.title for the current page; restores previous title on unmount. */
-export function usePageTitle(title) {
-  useEffect(() => {
-    const previous = document.title;
-    document.title = title;
-    return () => {
-      document.title = previous;
-    };
-  }, [title]);
+/** @deprecated Prefer useSeo({ title, description, path }) from @/lib/useSeo */
+export function usePageTitle(title, description = '') {
+  useSeo({ title, description, path: typeof window !== 'undefined' ? window.location.pathname : '/' });
 }

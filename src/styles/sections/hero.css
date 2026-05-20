@@ -62,9 +62,9 @@
   .hero-overlay-ltr {
     background: linear-gradient(
       180deg,
-      rgba(2, 11, 22, 0.94) 0%,
-      rgba(2, 11, 22, 0.88) 42%,
-      rgba(2, 11, 22, 0.72) 100%
+      rgba(2, 11, 22, 0.72) 0%,
+      rgba(2, 11, 22, 0.55) 38%,
+      rgba(2, 11, 22, 0.38) 100%
     );
   }
 }

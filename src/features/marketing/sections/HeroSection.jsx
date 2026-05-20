@@ -113,18 +113,17 @@ export default function HeroSection() {
               >
                 Get Matched Candidates
               </HiringCtaButton>
-              <a
-                href="#talent-pool"
+              <HiringCtaButton
+                source="hero_secondary"
+                variant="secondary"
                 className={cn(
-                  'inline-flex w-full min-h-12 items-center justify-center rounded-xl border border-slate-400/30',
-                  'bg-white/[0.03] px-5 py-3 text-sm font-semibold text-slate-50 backdrop-blur-sm',
-                  'transition-colors duration-200 hover:bg-white/[0.08]',
+                  'inline-flex w-full min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold',
                   'min-[400px]:min-h-[3.25rem] min-[400px]:rounded-2xl min-[400px]:px-7 min-[400px]:py-3.5 min-[400px]:text-[15px]',
                   'sm:w-auto sm:min-w-[11rem] sm:px-8 sm:py-4',
                 )}
               >
                 View Talent Pool
-              </a>
+              </HiringCtaButton>
             </div>
 
             <ul className="hero-animate-trust mt-6 flex flex-col gap-2.5 min-[400px]:mt-7 min-[400px]:gap-3 sm:mt-8 lg:flex-col lg:gap-3 xl:flex-row xl:flex-wrap xl:gap-x-8 2xl:gap-x-10">

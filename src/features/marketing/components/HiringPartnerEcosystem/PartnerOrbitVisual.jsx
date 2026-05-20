@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import NexaLogo from '@/components/ui/NexaLogo';
 import { partnerLogos } from '@/data/marketing/hiringPartnerEcosystem';
+import { usePartnerOrbitBreakpoint } from '@/lib/usePartnerOrbitBreakpoint';
 import { cn } from '@/lib/utils';
 
 const INNER_ORBIT_S = 40;
@@ -55,8 +56,12 @@ function PartnerLogoTile({
         variant === 'grid' && 'partner-orbit__tile--grid',
         variant === 'carousel' && 'partner-orbit__tile--carousel',
         `partner-orbit__tile--${logo.size || 'md'}`,
-        logo.ring === 'inner' && variant === 'orbit' && 'partner-orbit__tile--inner-ring',
-        logo.ring === 'outer' && variant === 'orbit' && 'partner-orbit__tile--outer-ring',
+        logo.ring === 'inner' &&
+          (variant === 'orbit' || variant === 'static') &&
+          'partner-orbit__tile--inner-ring',
+        logo.ring === 'outer' &&
+          (variant === 'orbit' || variant === 'static') &&
+          'partner-orbit__tile--outer-ring',
         isActive && 'partner-orbit__tile--active',
         isDimmed && 'partner-orbit__tile--dimmed',
         className,
@@ -144,7 +149,59 @@ function BackgroundParticles() {
   );
 }
 
-function OrbitStage({ logos, className }) {
+/** Mobile: fixed positions around center — no spin (avoids clip / off-center logos). */
+function StaticMobileOrbitStage({ logos }) {
+  const [hoveredId, setHoveredId] = useState(null);
+  const onHover = useCallback((id) => setHoveredId(id), []);
+
+  return (
+    <div className="partner-orbit__stage partner-orbit__stage--mobile partner-orbit__stage--static">
+      <div className="partner-orbit__glow-center" aria-hidden />
+      <div className="partner-orbit__bg-rings" aria-hidden>
+        <span className="partner-orbit__bg-ring partner-orbit__bg-ring--1" />
+        <span className="partner-orbit__bg-ring partner-orbit__bg-ring--2" />
+        <span className="partner-orbit__bg-ring partner-orbit__bg-ring--3" />
+      </div>
+      <div className="partner-orbit__ring partner-orbit__ring--inner" aria-hidden />
+      <div className="partner-orbit__ring partner-orbit__ring--outer" aria-hidden />
+
+      <div className="partner-orbit__static-logos" role="list" aria-label="Partner companies">
+        {logos.map((logo) => (
+          <div
+            key={logo.id}
+            className={cn(
+              'partner-orbit__static-anchor',
+              logo.ring === 'inner'
+                ? 'partner-orbit__static-anchor--inner'
+                : 'partner-orbit__static-anchor--outer',
+            )}
+            style={{ '--orbit-angle': `${logo.angle}deg` }}
+          >
+            <PartnerLogoTile
+              logo={logo}
+              hoveredId={hoveredId}
+              onHover={onHover}
+              variant="static"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="partner-orbit__hub">
+        <span className="partner-orbit__hub-glow" aria-hidden />
+        <NexaLogo
+          asLink={false}
+          size="nav"
+          imgClassName="!object-contain !object-center mx-auto w-full"
+          className="partner-orbit__hub-logo partner-orbit__hub-logo--nav mx-auto w-full justify-center"
+        />
+        <span className="partner-orbit__hub-sub">Hiring Network</span>
+      </div>
+    </div>
+  );
+}
+
+function OrbitStage({ logos, className, hubLogoSize = 'default' }) {
   const [hoveredId, setHoveredId] = useState(null);
   const onHover = useCallback((id) => setHoveredId(id), []);
 
@@ -215,7 +272,17 @@ function OrbitStage({ logos, className }) {
         className={cn('partner-orbit__hub', hoveredId !== null && 'partner-orbit__hub--active')}
       >
         <span className="partner-orbit__hub-glow" aria-hidden />
-        <NexaLogo asLink={false} size="default" className="partner-orbit__hub-logo mx-auto" />
+        <NexaLogo
+          asLink={false}
+          size={hubLogoSize}
+          imgClassName={
+            hubLogoSize === 'nav' ? '!object-contain !object-center mx-auto w-full' : 'mx-auto'
+          }
+          className={cn(
+            'partner-orbit__hub-logo mx-auto w-full justify-center',
+            hubLogoSize === 'nav' && 'partner-orbit__hub-logo--nav',
+          )}
+        />
         <span className="partner-orbit__hub-sub">Hiring Network</span>
         <span className="partner-orbit__hub-meta">
           <span className="partner-orbit__hub-dot" aria-hidden />
@@ -227,32 +294,51 @@ function OrbitStage({ logos, className }) {
 }
 
 
+function buildMobileLogos() {
+  const innerAngles = [0, 72, 144, 216, 288];
+  const outerAngles = [36, 108, 180, 252, 324];
+  const inner = partnerLogos
+    .filter((l) => l.ring === 'inner')
+    .slice(0, 5)
+    .map((logo, i) => ({ ...logo, angle: innerAngles[i], size: 'sm' }));
+  const outer = partnerLogos
+    .filter((l) => l.ring === 'outer')
+    .slice(0, 5)
+    .map((logo, i) => ({ ...logo, angle: outerAngles[i], size: 'sm' }));
+  return [...inner, ...outer];
+}
+
 export default function PartnerOrbitVisual({ className }) {
-  const tabletLogos = useMemo(() => partnerLogos.slice(0, 14), []);
-  const mobileLogos = useMemo(() => {
-    const innerAngles = [0, 90, 180, 270];
-    const outerAngles = [45, 135, 225, 315];
-    const inner = partnerLogos
-      .filter((l) => l.ring === 'inner')
-      .slice(0, 4)
-      .map((logo, i) => ({ ...logo, angle: innerAngles[i] }));
-    const outer = partnerLogos
-      .filter((l) => l.ring === 'outer')
-      .slice(0, 4)
-      .map((logo, i) => ({ ...logo, angle: outerAngles[i] }));
-    return [...inner, ...outer];
-  }, []);
+  const breakpoint = usePartnerOrbitBreakpoint();
+
+  const logos = useMemo(() => {
+    if (breakpoint === 'mobile') return buildMobileLogos();
+    if (breakpoint === 'tablet') return partnerLogos.slice(0, 14);
+    return partnerLogos;
+  }, [breakpoint]);
+
+  const hubLogoSize = breakpoint === 'desktop' ? 'default' : 'nav';
+
+  const stageClass = cn(
+    'partner-orbit__stage--responsive',
+    breakpoint === 'tablet' && 'partner-orbit__stage--tablet',
+  );
+
+  const canvasClass = cn(
+    'partner-orbit__canvas flex w-full items-center',
+    breakpoint === 'mobile' && 'justify-center',
+    breakpoint === 'tablet' && 'justify-center',
+    breakpoint === 'desktop' && 'partner-orbit__canvas--bleed-right justify-start',
+  );
 
   return (
     <div className={cn('partner-orbit w-full', className)}>
-      <div className="partner-orbit__canvas partner-orbit__canvas--desktop hidden lg:flex items-center justify-center">
-        <OrbitStage logos={partnerLogos} className="partner-orbit__stage--responsive" />
-      </div>
-      <div className="partner-orbit__canvas partner-orbit__canvas--tablet hidden md:flex lg:hidden items-center justify-center">
-        <OrbitStage logos={tabletLogos} className="partner-orbit__stage--responsive partner-orbit__stage--tablet" />
-      </div>
-      <div className="partner-orbit__canvas partner-orbit__canvas--mobile flex md:hidden items-center justify-center">
-        <OrbitStage logos={mobileLogos} className="partner-orbit__stage--mobile" />
+      <div className={canvasClass}>
+        {breakpoint === 'mobile' ? (
+          <StaticMobileOrbitStage logos={logos} />
+        ) : (
+          <OrbitStage logos={logos} hubLogoSize={hubLogoSize} className={stageClass} />
+        )}
       </div>
     </div>
   );

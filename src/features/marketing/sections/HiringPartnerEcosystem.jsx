@@ -23,7 +23,7 @@ export default function HiringPartnerEcosystem() {
       ref={sectionRef}
       id="hiring-partners"
       className={cn(
-        'partner-ecosystem marketing-section relative overflow-hidden',
+        'partner-ecosystem marketing-section relative',
         isVisible && 'partner-ecosystem--visible',
       )}
       aria-labelledby="partner-ecosystem-heading"
@@ -122,7 +122,7 @@ export default function HiringPartnerEcosystem() {
             </div>
           </div>
 
-          <PartnerOrbitVisual className="partner-ecosystem__visual w-full min-w-0 lg:justify-self-stretch" />
+          <PartnerOrbitVisual className="partner-ecosystem__visual mx-auto w-full min-w-0 md:max-w-none lg:mx-0 lg:justify-self-stretch" />
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ import TrustedHiringNetwork from '@/features/marketing/sections/TrustedHiringNet
 
 export default function HomePage() {
   return (
-    <div className="overflow-x-hidden bg-[#020B16]">
+    <div className="min-h-dvh bg-[#020B16]">
       <HeroSection />
       <TrustedHiringNetwork />
       <HiringProblemSection />

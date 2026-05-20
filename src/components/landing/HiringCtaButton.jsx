@@ -1,4 +1,5 @@
 import { useHiringRequirementModal } from '@/context/HiringRequirementModalContext';
+import { CTA_PRIMARY, CTA_SECONDARY } from '@/lib/marketingClasses';
 import { cn } from '@/lib/utils';
 
 /**
@@ -25,8 +26,8 @@ export default function HiringCtaButton({
     <button
       type="button"
       className={cn(
-        variant === 'secondary' && 'hero-cta-secondary',
-        variant === 'primary' && 'hero-cta-primary',
+        variant === 'secondary' && CTA_SECONDARY,
+        variant === 'primary' && CTA_PRIMARY,
         className,
       )}
       onClick={handleClick}

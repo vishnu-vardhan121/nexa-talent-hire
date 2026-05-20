@@ -1,5 +1,5 @@
 import LandingFooter from '@/features/marketing/sections/LandingFooter';
-import StaticSiteNavbar from '@/components/common/StaticSiteNavbar';
+import SiteNavbar from '@/components/layout/SiteNavbar';
 
 /** Dark-themed shell for marketing static pages: nav, background, footer. */
 export default function StaticSiteLayout({ children }) {
@@ -10,7 +10,7 @@ export default function StaticSiteLayout({ children }) {
         <div className="static-site__glow static-site__glow--cyan" />
         <div className="static-site__glow static-site__glow--violet" />
       </div>
-      <StaticSiteNavbar />
+      <SiteNavbar variant="sticky" ctaSource="static_nav" />
       <main className="static-site__main">{children}</main>
       <LandingFooter />
     </div>

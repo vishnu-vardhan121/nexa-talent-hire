@@ -6,6 +6,13 @@ export const HIRING_PROBLEM_COPY = {
   highlightLine: 'NEXA turns resume noise into a cleaner, faster shortlist workflow.',
 };
 
+/** Stat pills overlaid on the hiring-flow illustration */
+export const HIRING_FLOW_STATS = [
+  { label: 'Unverified resumes', tone: 'warn' },
+  { value: 'NEXA', label: 'Pre-screens every profile', tone: 'brand' },
+  { value: '3–5', label: 'Interview-ready picks', tone: 'success' },
+];
+
 export const painChips = [
   {
     label: 'Too many irrelevant resumes',

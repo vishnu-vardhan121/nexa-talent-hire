@@ -60,7 +60,7 @@ export default function HiringProblemSection() {
             </p>
           </header>
 
-          <HiringProblemVisual className="hiring-problem__visual w-full min-w-0 lg:max-w-[35rem] lg:justify-self-end" />
+          <HiringProblemVisual className="hiring-problem__visual w-full min-w-0 lg:max-w-[36rem] lg:justify-self-end" />
         </div>
 
         <ul

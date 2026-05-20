@@ -64,8 +64,7 @@ export default function HiringRequirementModal({ open, source, onClose }) {
       return undefined;
     }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('hiring-modal-open');
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') onClose();
@@ -78,7 +77,7 @@ export default function HiringRequirementModal({ open, source, onClose }) {
     }, 80);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.documentElement.classList.remove('hiring-modal-open');
       window.removeEventListener('keydown', onKeyDown);
       window.clearTimeout(timer);
     };
@@ -170,13 +169,13 @@ export default function HiringRequirementModal({ open, source, onClose }) {
 
   return (
     <div
-      className="hiring-modal"
+      className="hiring-modal scrollbar-none"
       role="presentation"
       onClick={handleClose}
     >
       <div
         ref={panelRef}
-        className={cn('hiring-modal__panel', open && 'hiring-modal__panel--open')}
+        className={cn('hiring-modal__panel scrollbar-none', open && 'hiring-modal__panel--open')}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

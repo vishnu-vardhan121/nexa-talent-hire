@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import HiringCtaButton from '@/components/landing/HiringCtaButton';
 import HiringCtaLink from '@/components/landing/HiringCtaLink';
+import NexaLogo from '@/components/ui/NexaLogo';
 import {
   footerBottom,
   footerBrand,
@@ -53,14 +54,11 @@ export default function LandingFooter() {
       <div className="landing-footer__inner">
         <div className="landing-footer__grid-main">
           <div className="landing-footer__brand">
-            <a href="/" className="landing-footer__logo" id="landing-footer-brand">
-              <span className="landing-footer__logo-mark font-display" aria-hidden>
-                NE
-                <span className="landing-footer__logo-x">X</span>
-                A
-              </span>
-              <span className="landing-footer__logo-rest font-display">Talent Hire</span>
-            </a>
+            <NexaLogo
+              size="footer"
+              className="landing-footer__logo"
+              id="landing-footer-brand"
+            />
 
             <p className="landing-footer__desc">{footerBrand.description}</p>
 

@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import NexaLogo from '@/components/ui/NexaLogo';
 import { partnerLogos } from '@/data/marketing/hiringPartnerEcosystem';
 import { cn } from '@/lib/utils';
 
@@ -214,7 +215,7 @@ function OrbitStage({ logos, className }) {
         className={cn('partner-orbit__hub', hoveredId !== null && 'partner-orbit__hub--active')}
       >
         <span className="partner-orbit__hub-glow" aria-hidden />
-        <span className="partner-orbit__hub-title font-display">NEXA</span>
+        <NexaLogo asLink={false} size="default" className="partner-orbit__hub-logo mx-auto" />
         <span className="partner-orbit__hub-sub">Hiring Network</span>
         <span className="partner-orbit__hub-meta">
           <span className="partner-orbit__hub-dot" aria-hidden />

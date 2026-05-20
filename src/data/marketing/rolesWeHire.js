@@ -1,5 +1,8 @@
 export const ROLES_WE_HIRE_COPY = {
   eyebrow: 'Talent Categories',
+  /** Split for responsive line breaks — full string for a11y/SEO elsewhere if needed */
+  headingLead: 'Hire Across Job-Ready',
+  headingTrail: 'Talent Categories',
   heading: 'Hire Across Job-Ready Talent Categories',
   subtitle:
     'From developers to digital and business roles, NEXA helps companies access pre-screened candidates based on real hiring requirements.',

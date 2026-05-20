@@ -30,7 +30,7 @@ export default function MainLayout() {
   return (
     <div className="flex min-h-dvh flex-col">
       <Navbar />
-      <main className="flex-1 pt-[68px]">
+      <main className="flex-1 pt-16">
         <Outlet />
       </main>
       <Footer />

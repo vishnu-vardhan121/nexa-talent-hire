@@ -14,7 +14,7 @@ export default function FinalHiringCTASection() {
       ref={sectionRef}
       id="final-hiring-cta"
       className={cn(
-        'final-hiring-cta marketing-section relative overflow-hidden',
+        'final-hiring-cta marketing-section relative scroll-mt-24',
         isVisible && 'final-hiring-cta--visible',
       )}
       aria-labelledby="final-hiring-cta-heading"

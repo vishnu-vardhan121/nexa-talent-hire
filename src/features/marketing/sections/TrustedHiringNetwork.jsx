@@ -41,8 +41,9 @@ export default function TrustedHiringNetwork() {
   return (
     <section
       ref={sectionRef}
+      id="trusted-hiring-network"
       className={cn(
-        'trusted-network marketing-section relative -mt-12 overflow-hidden pt-16 pb-14 sm:-mt-16 sm:pt-20 sm:pb-16 md:-mt-20 lg:-mt-24 lg:pt-24 lg:pb-0',
+        'trusted-network marketing-section relative -mt-12 overflow-hidden pt-16 pb-14 sm:-mt-16 sm:pt-20 sm:pb-16 md:-mt-20 lg:-mt-24 lg:pt-24 lg:pb-0 scroll-mt-24',
         isVisible && 'trusted-network--visible',
       )}
       aria-labelledby="trusted-network-heading"

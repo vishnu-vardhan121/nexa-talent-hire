@@ -1,3 +1,8 @@
+/** Full brand lockup (footer, orbit, app icon) */
+export const NEXA_LOGO_SRC = '/nexa-logo-full.png';
+/** Compact wordmark — navbar only */
+export const NEXA_LOGO_NAV_SRC = '/nexa-logo-nav.png';
+
 export const SITE = {
   name: 'NexaTalentHire',
   shortName: 'Nexa',
@@ -11,8 +16,12 @@ export const SITE = {
 
 export const HIRING_TEAM_MAILTO = `mailto:${SITE.contactEmail}`;
 
-export const NAV_LINKS = [
-  { label: 'Home', to: '/' },
-  { label: 'Talent', to: '/talent' },
-  { label: 'HR Dashboard', to: '/dashboard' },
+/** Primary nav — same labels and CTA on every page. */
+export const PRIMARY_NAV_LINKS = [
+  { label: 'How it works', sectionId: 'trusted-hiring-network' },
+  { label: 'Roles we hire', sectionId: 'roles-we-hire' },
+  { label: 'Contact', href: '/contact' },
 ];
+
+export const NAV_CTA_LABEL = 'Post requirement';
+

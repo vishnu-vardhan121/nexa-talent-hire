@@ -24,7 +24,7 @@ export default function RolesWeHireSection() {
       ref={sectionRef}
       id="roles-we-hire"
       className={cn(
-        'roles-we-hire marketing-section relative overflow-hidden',
+        'roles-we-hire marketing-section relative scroll-mt-24',
         isVisible && 'roles-we-hire--visible',
       )}
       aria-labelledby="roles-we-hire-heading"
@@ -39,7 +39,7 @@ export default function RolesWeHireSection() {
       </div>
 
       <div className="marketing-section__container">
-        <header className="roles-we-hire__header mx-auto max-w-[40rem] text-center">
+        <header className="roles-we-hire__header mx-auto max-w-[min(100%,42rem)] text-center md:max-w-[48rem] lg:max-w-[56rem] xl:max-w-[62rem]">
           <p className="roles-we-hire__eyebrow inline-flex items-center gap-2.5 rounded-full border border-[rgba(56,189,248,0.22)] bg-[rgba(15,23,42,0.72)] px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-[#CBD5E1] backdrop-blur-md sm:text-xs">
             <span
               className="h-2 w-2 shrink-0 rounded-full bg-[#38BDF8] shadow-[0_0_10px_#38BDF8]"
@@ -49,11 +49,12 @@ export default function RolesWeHireSection() {
           </p>
           <SectionHeadline
             id="roles-we-hire-heading"
-            className="roles-we-hire__heading marketing-section-headline--centered mt-4 text-center sm:mt-5"
+            className="roles-we-hire__heading marketing-section-headline--centered marketing-section-headline--roles mt-4 text-pretty sm:mt-5"
           >
-            {ROLES_WE_HIRE_COPY.heading}
+            <span className="block sm:inline">{ROLES_WE_HIRE_COPY.headingLead} </span>
+            <span className="block sm:inline">{ROLES_WE_HIRE_COPY.headingTrail}</span>
           </SectionHeadline>
-          <p className="roles-we-hire__subtitle mx-auto mt-3 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:text-[15px]">
+          <p className="roles-we-hire__subtitle mx-auto mt-3 max-w-[min(100%,40rem)] text-[0.9375rem] leading-[1.7] text-[#94A3B8] sm:mt-4 sm:max-w-[45rem] sm:text-[15px] lg:max-w-[50rem]">
             {ROLES_WE_HIRE_COPY.subtitle}
           </p>
         </header>
